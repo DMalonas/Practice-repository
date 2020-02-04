@@ -26,7 +26,6 @@ public class FileUtil {
 
 	public ArrayList<Rule> createAllRules() {
 		//Get rules with Java 8
-		File file = new File("AnnotationsPckgTestFile");
 		Path myPath = Paths.get("AnnotationsPckgTestFile");
 		ArrayList<Rule> rules = new ArrayList<Rule>();
         try {
