@@ -16,9 +16,6 @@ import java.util.stream.Stream;
 
 public class FileUtil {
 	
-	private int numOfLines = 0;
-	String[] linesWithRules;
-	ArrayList<Rule> typeAndNum;
 	private int numOfQueriesFromFirstLine;
 
 	
