@@ -9,7 +9,12 @@ public class ApplicationFile {
 	public static void main(String[] args) {	
 		
     	FileUtil fu = new FileUtil();
-    	ArrayList<Rule> rules = fu.createAllRules();
+    	
+    	
+    	ArrayList<Rule> rules = (ArrayList<Rule>) fu.createAllRules("MinimumSwapsInputTestFile");
+    	if (null == rules) {
+    		return;
+    	}
     	ArrayHandling ah = new ArrayHandling();
     	int result;
     	for (Rule rule : rules) {
@@ -20,6 +25,10 @@ public class ApplicationFile {
     			System.out.println("Exp result was " + rule.getExpectedResult() + " but actual res is "  + result);
     		}
     	}
+    	rules.clear();
+    	
+    	
+    	
 	}
 
 }
