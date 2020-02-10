@@ -19,13 +19,13 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class FileUtilSecure extends Thread{
+public class FileUtilSecure implements Runnable{
 	private String filename;
-	private byte[] digest;
+//	private byte[] digest;
 	
-	public byte[] getResult() {
-		return digest;
-	}
+//	public byte[] getResult() {
+//		return digest;
+//	}
 
 	public FileUtilSecure(String filename) {
 		this.filename = filename;
@@ -38,7 +38,8 @@ public class FileUtilSecure extends Thread{
 			DigestInputStream din = new DigestInputStream(new FileInputStream(filename), sha);
 			while(din.read() != -1);
 			din.close();
-			digest = sha.digest();
+			byte[] digest = sha.digest();
+			ApplicationFile.receiveDigest(digest, filename);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
