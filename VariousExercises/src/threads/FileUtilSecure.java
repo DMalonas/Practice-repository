@@ -21,14 +21,11 @@ import java.util.regex.*;
 
 public class FileUtilSecure implements Runnable{
 	private String filename;
-//	private byte[] digest;
-	
-//	public byte[] getResult() {
-//		return digest;
-//	}
+	private ApplicationFile apCallback;
 
-	public FileUtilSecure(String filename) {
+	public FileUtilSecure(String filename, ApplicationFile apCallback) {
 		this.filename = filename;
+		this.apCallback = apCallback;
 	}
 	
 	@Override
@@ -39,7 +36,7 @@ public class FileUtilSecure implements Runnable{
 			while(din.read() != -1);
 			din.close();
 			byte[] digest = sha.digest();
-			ApplicationFile.receiveDigest(digest, filename);
+			apCallback.receiveDigest(digest);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

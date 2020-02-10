@@ -4,17 +4,40 @@ import javax.xml.bind.*;
 
 public class ApplicationFile {
 
-	public static void receiveDigest(byte[] digest, String name) {
-		StringBuilder result = new StringBuilder(name);
-		result.append(": ");	
-		result.append(DatatypeConverter.printHexBinary(digest));
-		System.out.println(result);
+	private String filename;
+	private byte[] digest;
+	
+	public ApplicationFile(String filename) {
+		this.filename = filename;
 	}
+	
+	public void calculateDigest() {
+		FileUtilSecure fus = new FileUtilSecure(filename, this);
+		Thread t = new Thread(fus);
+		t.start();
+	}
+	
+	
+	public void receiveDigest(byte[] digest) {
+		this.digest = digest;
+		System.out.println(this);
+	}
+	
+	@Override
+	public String toString() {
+		String result = filename + ": ";
+		if (digest != null) {
+			result += DatatypeConverter.printHexBinary(digest);
+		} else {
+			result += "digest not available";
+		}
+		return result;
+	}
+	
 	public static void main(String[] args) {
 		for (String filename : args) {
-			FileUtilSecure fus = new FileUtilSecure(filename);
-			Thread t =new Thread(fus);
-			t.start();
+			ApplicationFile d = new ApplicationFile(filename);
+			d.calculateDigest();
 		}
 	}
 
