@@ -21,10 +21,10 @@ import java.util.regex.*;
 
 public class FileUtilSecure extends Thread{
 	private String filename;
-	private StringBuilder result;
+	private byte[] digest;
 	
-	public StringBuilder getResult() {
-		return result;
+	public byte[] getResult() {
+		return digest;
 	}
 
 	public FileUtilSecure(String filename) {
@@ -38,12 +38,7 @@ public class FileUtilSecure extends Thread{
 			DigestInputStream din = new DigestInputStream(new FileInputStream(filename), sha);
 			while(din.read() != -1);
 			din.close();
-			byte[] digest = sha.digest();
-
-			result = new StringBuilder(filename);
-			result.append(": ");
-			result.append(DatatypeConverter.printHexBinary(digest));
-//			System.out.println(result);
+			digest = sha.digest();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
