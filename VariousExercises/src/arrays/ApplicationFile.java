@@ -7,7 +7,17 @@ import java.util.List;
 public class ApplicationFile {
 
 	public static void main(String[] args) {	
-		
+
+//		int[] alph = new int[26];
+//		Arrays.fill(alph, 0);
+//		String sl = "aabbcc";
+//		for (int i = 0; i < alph.length; i++) {
+//			System.out.println(alph[i]) ;
+//			
+//		}
+//		for (int i = 0; i < sl.length(); i++) {
+//			System.out.print(" " + (sl.charAt(i) - 97) + " ");
+//		}
     	FileUtil fu = new FileUtil();
     	ArrayHandling ah = new ArrayHandling();
 
